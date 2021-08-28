@@ -14,6 +14,7 @@ class Brand(models.Model):
     def __str__(self):
         return self.brand
 
+
 class Product(models.Model):
     name = models.CharField(max_length=50)
     brand = models.ForeignKey(Brand, default='No brand', on_delete=models.CASCADE)

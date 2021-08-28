@@ -8,7 +8,7 @@ class Cart(models.Model):
     user = models.ForeignKey(MyUser, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.id
+        return f'Cart no. {self.id}'
 
 
 class ProductCart(models.Model):
@@ -17,4 +17,4 @@ class ProductCart(models.Model):
     quantity = models.IntegerField()
 
     def __str__(self):
-        return self.id
+        return f'ProductCart no. {self.id}'
