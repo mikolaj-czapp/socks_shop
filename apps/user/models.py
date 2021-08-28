@@ -17,18 +17,29 @@ class Cart(models.Model):
     id = models.BigAutoField(primary_key=True)
     user = models.ForeignKey(MyUser, on_delete=models.CASCADE)
 
+    def __str__(self):
+        return self.id
+
 
 class ProductCart(models.Model):
     id = models.BigAutoField(primary_key=True)
     cart = models.ForeignKey(Cart, on_delete=models.CASCADE)
     items = models.ForeignKey(Product, on_delete=models.CASCADE)
 
+    def __str__(self):
+        return self.id
+
 
 class Order(models.Model):
+    id = models.BigAutoField(primary_key=True)
     user = models.ForeignKey(MyUser, on_delete=models.CASCADE)
     items = models.ManyToManyField(Cart)
+    shipping_address = models.CharField(max_length=70)
     ordered_on = models.DateTimeField()
-    ordered = models.BooleanField(default=False)
+    status = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.id
 
 
 
