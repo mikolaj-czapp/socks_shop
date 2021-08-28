@@ -15,7 +15,7 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Cart',
+            name='cart',
             fields=[
                 ('id', models.BigAutoField(primary_key=True, serialize=False)),
             ],
@@ -61,7 +61,7 @@ class Migration(migrations.Migration):
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('ordered_on', models.DateTimeField()),
                 ('ordered', models.BooleanField(default=False)),
-                ('items', models.ManyToManyField(to='main.Cart')),
+                ('items', models.ManyToManyField(to='main.cart')),
                 ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='main.myuser')),
             ],
         ),

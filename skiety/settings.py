@@ -40,6 +40,9 @@ INSTALLED_APPS = [
 
     #Project Apps
     'apps.main',
+    'apps.cart',
+    'apps.order',
+    'apps.product',
     'apps.user',
 ]
 
@@ -102,6 +105,9 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+# for AbstractUser
+
+AUTH_USER_MODEL = 'user.MyUser'
 
 
 # Internationalization
