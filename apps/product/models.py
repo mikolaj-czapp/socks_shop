@@ -9,7 +9,7 @@ class Category(models.Model):
 
 
 class Brand(models.Model):
-    brand = models.CharField(max_length=50)
+    name = models.CharField(max_length=50)
 
     def __str__(self):
         return self.brand
@@ -17,9 +17,9 @@ class Brand(models.Model):
 
 class Product(models.Model):
     name = models.CharField(max_length=50)
-    brand = models.ForeignKey(Brand, default='No brand', on_delete=models.CASCADE)
+    brand = models.ForeignKey(Brand, on_delete=models.CASCADE)
     description = models.TextField(blank=True)
-    category_id = models.ForeignKey(Category, default='No category', on_delete=models.SET_DEFAULT)
+    category_id = models.ForeignKey(Category, on_delete=models.CASCADE)
     price = models.DecimalField(max_digits=12, decimal_places=2)
 
     def __str__(self):
