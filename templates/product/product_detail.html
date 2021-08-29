@@ -1,9 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends "base.html" %}
+
+{% block content %}
+
 <h1>Detailed product view</h1>
     <h1>{{ object.name }} - {{ object.brand }}</h1>
     <p>Category: {{ object.category_id }}</p>
     <p>{{ object.description }}</p>
     <p>Price: {{ object.price }} bitcoin</p>
 
-</html>
+{% endblock %}
