@@ -1,5 +1,35 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1>Your cart</h1>
+    <h2>Your cart</h2>
+<table class="table align-middle">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Name</th>
+      <th scope="col">Brand</th>
+      <th scope="col">Price</th>
+      <th scope="col">Quantity</th>
+      <th scope="col">Total</th>
+      <th scope="col">Remove</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for item in object.items.all %}
+    <tr>
+      <th scope="row">1</th>
+      <td>{{ item.product.name }}</td>
+      <td>{{ item.product.brand }}</td>
+      <td>{{ item.product.price }}</td>
+      <td>{{ item.quantity }}</td>
+      <td>{{ item.get_total_item_price }}</td>
+      <td>
+      <button type="button" class="btn btn-danger btn-sm px-3">
+          <i class="fas fa-times"></i>
+      </button>
+      </td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
 {% endblock %}
