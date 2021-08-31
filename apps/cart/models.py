@@ -7,7 +7,7 @@ from apps.user.models import MyUser
 class ProductCart(models.Model):
     user = models.ForeignKey(MyUser, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    quantity = models.IntegerField()
+    quantity = models.IntegerField(default=1)
 
     def get_total_item_price(self):
         return self.quantity * self.product.price

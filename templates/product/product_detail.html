@@ -7,5 +7,6 @@
     <p>Category: {{ object.category }}</p>
     <p>{{ object.description }}</p>
     <p>Price: {{ object.price }} bitcoin</p>
+    <a href="{{ object.get_add_to_cart_url }}">Dodaj do koszyka</a>
 
 {% endblock %}
