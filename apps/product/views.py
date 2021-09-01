@@ -44,3 +44,16 @@ def add_to_cart(request, **kwargs):
         cart.items.add(product_cart)
         messages.info(request, "Added to cart.")
         return redirect('product_detail', pk=slug)
+
+
+@login_required
+def remove_from_cart(request, **kwargs):
+    slug = 0
+    for kw in kwargs:
+        slug = kwargs[kw]
+    item = get_object_or_404(Product, id=slug)
+    cart = Cart.objects.filter(user=request.user)[0]
+    product_cart = ProductCart.objects.filter(product=item, user=request.user)
+    product_cart.delete()
+    messages.info(request, "This item was removed from your cart.")
+    return redirect("cart_by_user")

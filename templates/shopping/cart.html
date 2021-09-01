@@ -24,10 +24,13 @@
       <td>{{ item.quantity }}</td>
       <td>{{ item.get_total_item_price }}</td>
       <td>
-      <button type="button" class="btn btn-danger btn-sm px-3">
-          <i class="fas fa-times">Remove from cart</i>
+      <button type="submit" class="btn btn-danger btn-sm px-3"
+              value={{ item.product.get_remove_from_cart_url}} onclick="location.href='{% url 'remove-from-cart' slug=item.product.id %}'">
+          Remove from cart
       </button>
+
       </td>
+
     </tr>
   {% endfor %}
   </tbody>
