@@ -2,10 +2,11 @@
 
 {% block content %}
 
-<h1>Detailed product view</h1>
+<h2>Product details</h2>
     <h1>{{ object.name }} - {{ object.brand }}</h1>
     <p>Category: {{ object.category }}</p>
     <p>{{ object.description }}</p>
     <p>Price: {{ object.price }} bitcoin</p>
+    <a href="{{ object.get_add_to_cart_url }}">Add to cart</a>
 
 {% endblock %}
