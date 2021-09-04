@@ -1,11 +1,11 @@
 {% extends "base.html" %}
 {% load crispy_forms_tags %}
 {% block content %}
-      <main >
+      <main>
     <div class="container wow fadeIn">
       <h2 class="my-5 h2 text-center">Checkout form</h2>
-      <div class="row">
-        <div class="col-md-8 mb-4">
+      <div>
+        <div class="col-md-12 mb-4">
           <div class="card">
             <form method="POST" class="card-body">
               {% csrf_token %}
@@ -25,9 +25,6 @@
                 </div>
 
               </div>
-
-
-              <hr>
 
               <hr class="mb-4">
               <button class="btn btn-primary btn-lg btn-block" type="submit">Confirm order</button>
