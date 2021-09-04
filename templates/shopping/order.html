@@ -1,4 +1,4 @@
-{% extends base.html %}
+{% extends "base.html" %}
 {% load crispy_forms_tags %}
 {% block content %}
       <main >
@@ -15,7 +15,7 @@
               <div class='hideable_shipping_form'>
 
                 <div class="md-form mb-5">
-                  <input type='text' placeholder='1234 Main St' id='shipping_address' name='shipping_address' class='form-control' />
+                  <input type='text' placeholder='ul. Jana Pawła II, 70-311 Szczecin' id='shipping_address' name='shipping_address' class='form-control' />
                   <label for="shipping_address" class="">Address</label>
                 </div>
 
@@ -30,7 +30,7 @@
               <hr>
 
               <hr class="mb-4">
-              <button class="btn btn-primary btn-lg btn-block" type="submit">Continue to checkout</button>
+              <button class="btn btn-primary btn-lg btn-block" type="submit">Confirm order</button>
 
             </form>
 
@@ -41,21 +41,20 @@
 <div class="col-md-12 mb-4">
     <h4 class="d-flex justify-content-between align-items-center mb-3">
     <span class="text-muted">Your cart</span>
-    <span class="badge badge-secondary badge-pill">{{ order.items.count }}</span>
+    <span class="badge badge-secondary badge-pill">{{ cart.items.count }}</span>
     </h4>
     <ul class="list-group mb-3 z-depth-1">
-    {% for order_item in order.items.all %}
+    {% for order_item in cart.items.all %}
     <li class="list-group-item d-flex justify-content-between lh-condensed">
         <div>
-        <h6 class="my-0">{{ order_item.quantity }} x {{ order_item.item.title}}</h6>
-        <small class="text-muted">{{ order_item.item.description}}</small>
+        <h6 class="my-0">{{ order_item.quantity }} x {{ order_item.product.name}}</h6>
+        <small class="text-muted">{{ order_item.product.description}}</small>
         </div>
-        <span class="text-muted">${{ order_item.get_final_price }}</span>
     </li>
     {% endfor %}
     <li class="list-group-item d-flex justify-content-between">
         <span>Total</span>
-        <strong>${{ order.get_total }}</strong>
+        <strong>{{ cart.get_total}} </strong>
     </li>
     </ul>
 
