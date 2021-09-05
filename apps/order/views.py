@@ -26,3 +26,4 @@ class CheckoutView(View):
         form = OrderForm(self.request.POST or None)
         if form.is_valid():
             return redirect('home')
+
