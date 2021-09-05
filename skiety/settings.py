@@ -115,6 +115,7 @@ AUTH_PASSWORD_VALIDATORS = [
 AUTH_USER_MODEL = 'user.MyUser'
 
 
+
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 
@@ -138,3 +139,15 @@ STATIC_URL = '/static/'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+CRISPY_TEMPLATE_PACK="bootstrap4"
+
+#search_engine
+ELASTICSEARCH_DSL = {
+    'default': {
+        'hosts': 'localhost:9200',
+    },
+}
+
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'

@@ -1,4 +1,7 @@
+
 from django.urls import include, path
+
+
 
 """skiety URL Configuration
 
@@ -15,12 +18,14 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from apps.main import views
 from django.contrib import admin
 from django.urls import path, include
 
+
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('accounts/', include('django.contrib.auth.urls')),
+    path('user/', include('apps.user.urls')),
     path('', include('apps.product.urls')),
     path('', include('apps.main.urls')),
     path('', include('apps.cart.urls')),
