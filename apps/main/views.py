@@ -6,7 +6,6 @@ from django.contrib import messages
 from apps.main.forms import NewUserForm
 from apps.user.forms import CustomUserCreationForm
 
-
 def index(request):
     return render(request, 'home.html')
 
