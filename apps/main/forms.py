@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 
 
 class NewUserForm(UserCreationForm):
@@ -11,7 +11,7 @@ class NewUserForm(UserCreationForm):
     city = forms.CharField(max_length=30)
 
     class Meta:
-        model = User
+        model = get_user_model()
         fields = ("username", "email", "city", "street", "postal_code", "password1", "password2")
 
     def save(self, commit=True):
