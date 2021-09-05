@@ -18,7 +18,7 @@ class ProductCart(models.Model):
 
 class Cart(models.Model):
     user = models.ForeignKey(MyUser, on_delete=models.CASCADE)
-    items = models.ManyToManyField(ProductCart)
+    items = models.ManyToManyField(ProductCart, blank=True)
 
     def get_total(self):
         total = 0

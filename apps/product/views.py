@@ -5,6 +5,8 @@ from django.contrib import messages
 
 from django.views.generic.list import ListView
 from django.views.generic import DetailView
+
+from apps.order.models import Order
 from apps.product.models import Product
 from apps.cart.models import Cart, ProductCart
 
@@ -27,8 +29,9 @@ def add_to_cart(request, **kwargs):
     item = get_object_or_404(Product, id=slug)
     product_cart, created = ProductCart.objects.get_or_create(product=item, user=request.user)
     cart = Cart.objects.filter(user=request.user)
+    cart_id = Cart.objects.filter(user=request.user).count() - 1
     if cart.exists():
-        cart = cart[0]
+        cart = cart[cart_id]
         # check if product is in the cart
         if cart.items.filter(product__id=item.id).exists():
             product_cart.quantity += 1
@@ -52,7 +55,6 @@ def remove_from_cart(request, **kwargs):
     for kw in kwargs:
         slug = kwargs[kw]
     item = get_object_or_404(Product, id=slug)
-    cart = Cart.objects.filter(user=request.user)[0]
     product_cart = ProductCart.objects.filter(product=item, user=request.user)
     product_cart.delete()
     messages.info(request, "This item was removed from your cart.")
