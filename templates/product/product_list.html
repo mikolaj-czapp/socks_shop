@@ -3,6 +3,11 @@
 {% block content %}
 
 <h1>Products</h1>
+
+<form action="{% url 'search_engine/search_results' %}" method="get">
+  <input name="q" type="text" placeholder="Search...">
+</form>
+
 <ul>
 {% for product in object_list %}
     <li>

@@ -1,10 +1,11 @@
 from django.contrib.auth.decorators import login_required
+from django.db.models import Q
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse_lazy
 from django.contrib import messages
 
 from django.views.generic.list import ListView
-from django.views.generic import DetailView
+from django.views.generic import DetailView, TemplateView
 from apps.product.models import Product
 from apps.cart.models import Cart, ProductCart
 
@@ -57,3 +58,17 @@ def remove_from_cart(request, **kwargs):
     product_cart.delete()
     messages.info(request, "This item was removed from your cart.")
     return redirect("cart_by_user")
+
+
+class HomePageView(TemplateView):
+    template_name = 'home.html'
+
+
+class SearchResultsView(ListView):
+    model = Product
+    template_name = 'search_engine/search_results.html'
+
+    def get_queryset(self):
+        query = self.request.GET.get('q')
+        object_list = Product.objects.filter(name__icontains=query)
+        return object_list
