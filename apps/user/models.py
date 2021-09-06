@@ -7,6 +7,9 @@ class MyUser(AbstractUser):
     street = models.CharField(max_length=70)
     postal_code = models.CharField(max_length=6)
 
+    def get_address(self):
+        return f'{self.street} {self.postal_code} {self.city}'
+
     def __str__(self):
         return self.username
 

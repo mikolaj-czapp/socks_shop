@@ -8,5 +8,5 @@ from apps.order.models import Order
 
 
 class OrderForm(forms.Form):
-    shipping_address = forms.CharField()
+    shipping_address = forms.CharField(required=False)
     same_shipping_address = forms.BooleanField(widget=forms.CheckboxInput)

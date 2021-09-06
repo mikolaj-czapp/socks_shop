@@ -20,14 +20,14 @@
                 </div>
 
                 <div class="custom-control custom-checkbox">
-                  <input type="checkbox" class="custom-control-input" name="same_billing_address" id="same_billing_address">
-                  <label class="custom-control-label" for="same_billing_address">Shipping address is the same as user address</label>
+                  <input type="checkbox" class="custom-control-input" name="same_shipping_address" id="same_shipping_address">
+                  <label class="custom-control-label" for="same_shipping_address">Shipping address is the same as user address</label>
                 </div>
 
               </div>
 
               <hr class="mb-4">
-              <button class="btn btn-primary btn-lg btn-block" type="submit">Confirm order</button>
+              <button class="btn btn-primary btn-lg btn-block" type="submit" onclick="location.href='{% url 'confirm-order' %}'">Confirm order</button>
 
             </form>
 

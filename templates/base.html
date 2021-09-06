@@ -52,9 +52,15 @@
                 <a class="nav-item nav-link active" href="{% url "login" %}">
                     Login
                 </a>
+                <a class="nav-item nav-link active" href="{% url "register" %}">
+                    Register
+                </a>
                 {% else %}
                 <a class="nav-item nav-link active" href="{% url "logout" %}">
                     Logout
+                </a>
+                <a class="nav-item nav-link active" href="{% url "cart_by_user" %}">
+                    Cart
                 </a>
                 <p class="text-white">{{request.user.username}}</p>
                 {% endif %}
