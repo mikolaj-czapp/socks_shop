@@ -36,16 +36,16 @@ def add_to_cart(request, **kwargs):
         if cart.items.filter(product__id=item.id).exists():
             product_cart.quantity += 1
             product_cart.save()
-            messages.info(request, "Cart updated.")
+            messages.success(request, "Cart updated.")
             return redirect('product_detail', pk=slug)
         else:
             cart.items.add(product_cart)
-            messages.info(request, "Added to cart.")
+            messages.success(request, "Added to cart.")
             return redirect('product_detail', pk=slug)
     else:
         cart = Cart.objects.create(user=request.user)
         cart.items.add(product_cart)
-        messages.info(request, "Added to cart.")
+        messages.success(request, "Added to cart.")
         return redirect('product_detail', pk=slug)
 
 

@@ -1,9 +1,11 @@
 from datetime import datetime
 
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.views import View
+from django.views.generic.list import ListView
 
 from .forms import OrderForm
 
@@ -45,6 +47,24 @@ class CheckoutView(View):
             )
             order.save()
             Cart.objects.create(user=self.request.user)
+            messages.success(self.request, "Order succesfuly submitted.")
             return redirect('home')
         else:
-            return HttpResponse("not valid")
+            messages.error(self.request, "Order form invalid. Try again or contact us.")
+            return redirect('home')
+
+
+class OrdersByUserView(LoginRequiredMixin, View):
+    def get(self,  *args, **kwargs):
+        try:
+            orders = Order.objects.filter(user=self.request.user)
+            context = {
+                'object': orders
+            }
+            if not orders.exists():
+                messages.info(self.request, "You do not have an active order.")
+                return redirect('home')
+            return render(self.request, 'shopping/orders_by_user.html', context)
+        except ObjectDoesNotExist:
+            messages.info(self.request, "You do not have an active order.")
+            return redirect('home')
