@@ -1,10 +1,8 @@
-from django.shortcuts import render
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate
 from django.contrib import messages
 
 from apps.main.forms import NewUserForm
-from apps.user.forms import CustomUserCreationForm
 
 
 def index(request):

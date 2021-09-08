@@ -1,12 +1,10 @@
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, get_object_or_404, redirect
-from django.urls import reverse_lazy
+from django.shortcuts import get_object_or_404, redirect
 from django.contrib import messages
 
 from django.views.generic.list import ListView
 from django.views.generic import DetailView
 
-from apps.order.models import Order
 from apps.product.models import Product
 from apps.cart.models import Cart, ProductCart
 
