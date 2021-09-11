@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>Search results</h1>
+<ul>
+{% for sock in object_list %}
+    <li>
+        {{ sock.name }}, {{sock.brand}}, {{sock.category}}, {{sock.price}}
+    </li>
+{% endfor %}
+</ul>
+{% endblock %}

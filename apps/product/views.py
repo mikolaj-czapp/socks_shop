@@ -1,10 +1,13 @@
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import get_object_or_404, redirect
+
+from django.db.models import Q
+from django.shortcuts import render, get_object_or_404, redirect
+from django.urls import reverse_lazy
 from django.contrib import messages
 
 from django.views.generic.list import ListView
-from django.views.generic import DetailView
-
+from django.views.generic import DetailView, TemplateView
+from apps.order.models import Order
 from apps.product.models import Product
 from apps.cart.models import Cart, ProductCart
 
@@ -34,16 +37,16 @@ def add_to_cart(request, **kwargs):
         if cart.items.filter(product__id=item.id).exists():
             product_cart.quantity += 1
             product_cart.save()
-            messages.info(request, "Cart updated.")
+            messages.success(request, "Cart updated.")
             return redirect('product_detail', pk=slug)
         else:
             cart.items.add(product_cart)
-            messages.info(request, "Added to cart.")
+            messages.success(request, "Added to cart.")
             return redirect('product_detail', pk=slug)
     else:
         cart = Cart.objects.create(user=request.user)
         cart.items.add(product_cart)
-        messages.info(request, "Added to cart.")
+        messages.success(request, "Added to cart.")
         return redirect('product_detail', pk=slug)
 
 
@@ -57,3 +60,20 @@ def remove_from_cart(request, **kwargs):
     product_cart.delete()
     messages.info(request, "This item was removed from your cart.")
     return redirect("cart_by_user")
+
+
+class HomePageView(TemplateView):
+    template_name = 'home.html'
+
+
+class SearchResultsView(ListView):
+    model = Product
+    template_name = 'search_engine/search_results.html'
+
+    def get_queryset(self):
+        query = self.request.GET.get('q')
+        object_list = Product.objects.filter(
+            Q(name__icontains=query) | Q(price__icontains=query) | Q(brand__name__icontains=query)
+            | Q(category__name__icontains=query)
+        )
+        return object_list
