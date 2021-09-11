@@ -1,11 +1,8 @@
 from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import render, redirect
 from django.views import View
-from django.views.generic import TemplateView, DetailView
-from django.views.generic.list import ListView
 from django.contrib.auth.mixins import LoginRequiredMixin
 
-from apps.cart.models import ProductCart
 from apps.cart.models import Cart
 
 
