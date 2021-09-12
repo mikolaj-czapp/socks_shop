@@ -20,6 +20,6 @@ class CustomUserChangeForm(UserChangeForm):
 class RegisterForm(UserCreationForm):
     class Meta:
         model = get_user_model()
-        fields = ('email', 'username', 'password1', 'password2')
+        fields = ('email', 'username', 'city', 'street', 'postal_code', 'password1', 'password2')
 
 

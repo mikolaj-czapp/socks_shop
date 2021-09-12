@@ -2,10 +2,9 @@ from datetime import datetime
 
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import ObjectDoesNotExist
-from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.views import View
-from django.views.generic.list import ListView
+
 
 from .forms import OrderForm
 
@@ -14,7 +13,7 @@ from ..cart.models import Cart
 from django.contrib import messages
 
 
-class CheckoutView(View):
+class CheckoutView(LoginRequiredMixin, View):
     def get(self, *args, **kwargs):
         try:
             user_carts = Cart.objects.filter(user=self.request.user).count() - 1
