@@ -7,12 +7,19 @@ from apps.cart.models import Cart
 
 
 class CartByUserView(LoginRequiredMixin, View):
+    """
+    For showing the user's cart.
+    """
     template_name = 'shopping/cart.html'
 
     def get(self, *args, **kwargs):
+        """
+        Get method to fetch the user's carts. Returns a redirect to empty cart site if user has no active cart.
+        Otherwise, return the request with the most recent cart of the user.
+        """
         try:
-            user_carts = max(0, Cart.objects.filter(user=self.request.user).count() - 1)
-            if not user_carts:
+            user_carts = Cart.objects.filter(user=self.request.user).count()
+            if user_carts == 1:
                 cart = Cart.objects.get(user=self.request.user)
             else:
                 cart = Cart.objects.filter(user=self.request.user).all()[user_carts]

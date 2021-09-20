@@ -5,6 +5,9 @@ from apps.user.models import MyUser
 
 
 class ProductCart(models.Model):
+    """
+    A table connecting the shop item to the cart.
+    """
     user = models.ForeignKey(MyUser, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     quantity = models.IntegerField(default=1)

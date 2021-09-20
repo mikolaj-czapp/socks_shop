@@ -1,7 +1,4 @@
-from django.contrib.auth import login
 from django.contrib.auth.forms import AuthenticationForm
-from django.shortcuts import redirect, render
-from django.urls import reverse
 from django.views import generic
 
 from apps.user.forms import CustomUserCreationForm, RegisterForm

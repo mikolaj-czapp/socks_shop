@@ -14,23 +14,28 @@ from django.contrib import messages
 
 
 class CheckoutView(LoginRequiredMixin, View):
+    """
+    A checkout view when user confirms his cart for ordering.
+    """
     def get(self, *args, **kwargs):
+        # Gets the most recent cart of the user and passes it to the checkout.
         try:
-            user_carts = Cart.objects.filter(user=self.request.user).count() - 1
-            cart = Cart.objects.filter(user=self.request.user).all()[user_carts]
+            user_carts = Cart.objects.filter(user=self.request.user).count()
+            cart = Cart.objects.filter(user=self.request.user).all()[user_carts - 1]
             form = OrderForm
             context = {
                 'form': form,
                 'cart': cart
             }
-            return render(self.request, 'shopping/order.html', context)
+            return render(self.request, 'shopping/checkout.html', context)
         except ObjectDoesNotExist:
             messages.info(self.request, "You do not have an active order")
             return redirect('home')
 
     def post(self, *args, **kwargs):
+        # Get the order information from the user via a form and create an Order object in the database.
         form = OrderForm(self.request.POST or None)
-        user_carts = Cart.objects.filter(user=self.request.user).count() - 1
+        user_carts = Cart.objects.filter(user=self.request.user).count()
         if form.is_valid():
             same_shipping_address = form.cleaned_data.get("same_shipping_address")
             if same_shipping_address:
@@ -39,7 +44,7 @@ class CheckoutView(LoginRequiredMixin, View):
                 shipping_address = form.cleaned_data.get("shipping_address")
             order = Order(
                 user=self.request.user,
-                cart=Cart.objects.filter(user=self.request.user)[user_carts],
+                cart=Cart.objects.filter(user=self.request.user)[user_carts - 1],
                 shipping_address=shipping_address,
                 ordered_on=datetime.now(),
                 status=True
@@ -54,6 +59,9 @@ class CheckoutView(LoginRequiredMixin, View):
 
 
 class OrdersByUserView(LoginRequiredMixin, View):
+    """
+    For showing the orders of the user.
+    """
     def get(self,  *args, **kwargs):
         try:
             orders = Order.objects.filter(user=self.request.user)

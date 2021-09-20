@@ -10,6 +10,9 @@ from apps.user.models import MyUser
 
 
 class OrderByUser(TestCase):
+    """
+    These are basic tests, subject to development.
+    """
     def setUp(self):
         # create two users
         test_user_1 = MyUser.objects.create_user(
