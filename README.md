@@ -20,5 +20,6 @@ Quit the server with CTRL-BREAK.
 Go to `http://127.0.0.1:8000/` in your browser to see the website.
 
 ## What to expect in the future (status: IX 2021)
++ Add database diagram
 + Expand the website's functionalities
 + Dockerize the project
